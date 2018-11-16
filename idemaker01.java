@@ -76,7 +76,7 @@ public class idemaker01 extends JFrame implements ActionListener,KeyListener{
 
     public void actionPerformed(ActionEvent e) {
         String cmd =e.getActionCommand();
-        //if("save".equals(cmd)) save();
+        if("save".equals(cmd)) save();
         if("open".equals(cmd)) read();
         if("Run".equals(cmd)) {try {
             Rx();
@@ -87,6 +87,35 @@ public class idemaker01 extends JFrame implements ActionListener,KeyListener{
         if("check F4".equals(cmd)) 
             check();
     }
+    public void save(){
+        if(file==null){
+            JFileChooser jfc=new JFileChooser();
+            file=jfc.getSelectedFile();
+            jfc.showSaveDialog(jfc);
+            file=jfc.getSelectedFile();
+            if(file!=null){
+                try{
+                    file.createNewFile();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        OutputStreamWriter out=null;
+        if(file!=null){
+            try{
+                FileOutputStream fos=new FileOutputStream(file);
+                out=new OutputStreamWriter(fos,"GBK");
+                
+                out.write(jta.getText());
+                out.flush();
+                out.close();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+    
     public void read(){
         JFileChooser jfc=new JFileChooser();
         jfc.showOpenDialog(jfc);
