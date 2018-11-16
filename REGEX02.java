@@ -49,9 +49,12 @@ public class REGEX02
                 //if(x!=n-1)
                 //System.out.println((String)dt.get(n-1));
                 //System.out.println((String)dt.get(n+1));
-                if(x!=n-1)
+                if(dt.get(x)!=dt.get(n)){
                     check.add((String) dt.get(n-1)+" "+(String) dt.get(n));
                     check.add((String) dt.get(n)+" "+(String) dt.get(n+1));
+                }
+                else
+                check.add((String) dt.get(n)+" "+(String) dt.get(n+1));
                     x=n+1;
             }
         }
