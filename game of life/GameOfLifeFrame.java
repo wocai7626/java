@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 public class GameOfLifeFrame extends JFrame {
 
-    private JButton openFileBtn = new JButton("选择文件");
-    private JButton startGameBtn = new JButton("开始游戏");
-    private JLabel durationPromtLabel = new JLabel("动画间隔设置(ms为单位)");
+    private JButton openFileBtn = new JButton("choose file");
+    private JButton startGameBtn = new JButton("start");
+    private JLabel durationPromtLabel = new JLabel("Animation interval settings (in ms)");
     private JTextField durationTextField = new JTextField();
     
     private boolean isStart = false;
@@ -38,7 +38,7 @@ public class GameOfLifeFrame extends JFrame {
     private int duration = DEFAULT_DURATION;
 
     public GameOfLifeFrame() {
-        setTitle("生命游戏");
+        setTitle("game of life");
         openFileBtn.addActionListener(new OpenFileActioner());
         startGameBtn.addActionListener(new StartGameActioner());
 
@@ -61,13 +61,13 @@ public class GameOfLifeFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser fcDlg = new JFileChooser(".");
-            fcDlg.setDialogTitle("请选择初始配置文件");
+            fcDlg.setDialogTitle("Please select the initial configuration text");//use InitCase creat initial configuration text
             int returnVal = fcDlg.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
 
                 isStart = false;
                 stop = true;
-                startGameBtn.setText("开始游戏");
+                startGameBtn.setText("Start game");
 
                 String filepath = fcDlg.getSelectedFile().getPath();
                 cellMatrix = Utils.initMatrixFromFile(filepath);
@@ -128,11 +128,11 @@ public class GameOfLifeFrame extends JFrame {
                 new Thread(new GameControlTask()).start();
                 isStart = true;
                 stop = false;
-                startGameBtn.setText("暂停游戏");
+                startGameBtn.setText("stop");
             } else {
                 stop = true;
                 isStart = false;
-                startGameBtn.setText("开始游戏");
+                startGameBtn.setText("start");
             }
         }
     }
